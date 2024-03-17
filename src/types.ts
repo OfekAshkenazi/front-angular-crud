@@ -27,10 +27,27 @@ export interface Options {
     | boolean;
 }
 
+export interface Products {
+  itmes: Product[];
+  total: number;
+  page: number;
+  perPage: number;
+  totalPages: number;
+}
 export interface Product {
-
+    price: string
+    name: string
+    image: string
+    rating: number
 }
 
 export interface PaginationParams {
-
+  // with this i can get any key i want.
+  //   [key: string]:
+  //     | string
+  //     | number
+  //     | boolean
+  //     | ReadonlyArray<string | number | boolean>;
+  page: number;
+  perPage: number;
 }
