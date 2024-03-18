@@ -64,7 +64,7 @@ app-root {
 
 .row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .column {
@@ -95,7 +95,7 @@ app-root {
 .gap-2 {
   gap: rem(32px);
 }
-.sapce-between {
+.space-between {
   justify-content: space-between;
 }
 .align-center {
