@@ -28,26 +28,25 @@ export interface Options {
 }
 
 export interface Products {
-  itmes: Product[];
+  items: Product[];
   total: number;
   page: number;
   perPage: number;
   totalPages: number;
 }
 export interface Product {
-    price: string
-    name: string
-    image: string
-    rating: number
+  price: string;
+  name: string;
+  image: string;
+  rating: number;
 }
 
 export interface PaginationParams {
-  // with this i can get any key i want.
-  //   [key: string]:
-  //     | string
-  //     | number
-  //     | boolean
-  //     | ReadonlyArray<string | number | boolean>;
+  [key: string]:
+    | string
+    | number
+    | boolean
+    | ReadonlyArray<string | number | boolean>;
   page: number;
   perPage: number;
 }
