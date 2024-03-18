@@ -1,3 +1,20 @@
+@import './styles/variables.scss';
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+// @import "primeng/resources/themes/luna-green/theme.css";
+
+@import "primeng/resources/primeng.css";
+
+// REM Functions
+@function rem($size) {
+  $remSize: calc($size / 16px);
+  @return calc($remSize * 1rem);
+}
+
+// EM Functions
+@function em($pixels, $context: 16px) {
+  @return calc(($pixels/$context) * 1em);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -32,4 +49,62 @@ img {
 
 a {
   text-decoration: none;
+}
+
+html,
+body,
+app-root {
+  height: 100%;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-15 {
+  margin-top: em(15px);
+}
+.mt-25 {
+  margin-top: em(25px);
+}
+.mb-15 {
+  margin-bottom: em(15px);
+}
+.mb-25 {
+  margin-bottom: em(25px);
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.gap-1 {
+  gap: rem(16px);
+}
+.gap-2 {
+  gap: rem(32px);
+}
+.sapce-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.full-center {
+  align-items: center;
+  justify-content: center;
+}
+.hidden {
+  display: none;
 }
