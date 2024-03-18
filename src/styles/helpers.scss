@@ -1,0 +1,68 @@
+// REM Functions
+@function rem($size) {
+    $remSize: calc($size / 16px);
+    @return calc($remSize * 1rem);
+  }
+  
+  // EM Functions
+  @function em($pixels, $context: 16px) {
+    @return calc(($pixels/$context) * 1em);
+  }
+
+img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-15 {
+  margin-top: em(15px);
+}
+.mt-25 {
+  margin-top: em(25px);
+}
+.mb-15 {
+  margin-bottom: em(15px);
+}
+.mb-25 {
+  margin-bottom: em(25px);
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.gap-1 {
+  gap: rem(16px);
+}
+.gap-05 {
+  gap: rem(8px);
+}
+.gap-2 {
+  gap: rem(32px);
+}
+.space-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.full-center {
+  align-items: center;
+  justify-content: center;
+}
+.hidden {
+  display: none;
+}
