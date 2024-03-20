@@ -1,7 +1,14 @@
 .wrapper {
-  width: 250px;
+  min-width: 250px;
+  max-width: 280px;
+  min-height: 470px;
+  border-radius: 15px;
+  padding: 5px;
 
-  
+  &:hover {
+    animation: pulse 2s ;
+  }
+
   img {
     aspect-ratio: 1;
     object-fit: contain;
@@ -12,7 +19,7 @@
 
   .title {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .price-label {
@@ -24,4 +31,9 @@
     font-weight: 500;
     font-size: 1rem;
   }
+}
+
+@keyframes pulse {
+  0%, 100% {transform: scale(1);}
+  50% {transform: scale(1.08);}
 }

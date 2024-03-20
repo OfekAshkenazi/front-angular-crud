@@ -1,36 +1,19 @@
-<div class="column gap-1">
+<div class="column gap-1 max-height">
   <button type="button" pButton icon="pi pi-plus" (click)="toggleAddView()" label="Add Product"></button>
 
   <div class="row wrap gap-1 space-between">
-    <app-product
-      *ngFor="let product of products"
-      [product]="product"
-      (edit)="toggleEditView($event)"
-      (delete)="toggleDeleteView($event)"
-
-    ></app-product>
+    <app-product *ngFor="let product of products" [product]="product" (edit)="toggleEditView($event)"
+      (delete)="toggleDeleteView($event)"></app-product>
   </div>
 
-  <p-paginator
-    [rows]="5"
-    [totalRecords]="totalRecords"
-    [rowsPerPageOptions]="[5, 10, 20]"
-    (onPageChange)="onPageChange($event)"
-  >
-  </p-paginator>
 </div>
+<p-paginator [rows]="5" [totalRecords]="totalRecords" (onPageChange)="onPageChange($event)" [showFirstLastIcon]="false"
+  #paginator>
+</p-paginator>
 
-<app-edit-product
-  [(display)]="displayAddProduct"
-  (confirm)="onConfirmAdd($event)"
-  header="Add Product"
->
+<app-edit-product [(display)]="displayAddProduct" (confirm)="onConfirmAdd($event)" header="Add Product">
 </app-edit-product>
 
-<app-edit-product
-  [product]="selectedProduct"
-  [(display)]="displayEditProduct"
-  (confirm)="onConfirmEdit($event)"
-  header="Edit Product"
->
+<app-edit-product [product]="selectedProduct" [(display)]="displayEditProduct" (confirm)="onConfirmEdit($event)"
+  header="Edit Product">
 </app-edit-product>

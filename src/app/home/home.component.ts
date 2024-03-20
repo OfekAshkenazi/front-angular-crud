@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ProductsService } from './../services/products.service';
 import { Product, Products } from '../../types';
 import { ProductComponent } from '../components/product/product.component';
 import { CommonModule } from '@angular/common';
-import { PaginatorModule } from 'primeng/paginator';
+import { Paginator, PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { EditComponent } from '../components/edit/edit.component';
 
@@ -21,12 +21,24 @@ import { EditComponent } from '../components/edit/edit.component';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService) { }
   products: Product[] = [];
   totalRecords: number = 0;
   displayAddProduct: boolean = false;
   displayEditProduct: boolean = false;
 
+  @ViewChild('paginator') paginator: Paginator | undefined
+
+  selectedProduct: Product = {
+    id: 0,
+    name: '',
+    image: '',
+    price: '',
+    rating: 0,
+  };
+
+
+  // toggles states
   toggleEditView(product: Product) {
     this.selectedProduct = product;
     this.displayEditProduct = true;
@@ -37,16 +49,11 @@ export class HomeComponent {
   }
 
   toggleDeleteView(product: Product) {
+    if (!product.id) {
+      return
+    }
     this.deleteProduct(product.id);
   }
-
-  selectedProduct: Product = {
-    id: 0,
-    name: '',
-    image: '',
-    price: '',
-    rating: 0,
-  };
 
   onConfirmAdd(product: Product) {
     this.addProduct(product);
@@ -61,6 +68,12 @@ export class HomeComponent {
   onPageChange(event: any) {
     this.getProducts(event.page, event.rows);
   }
+
+  resetPaginator() {
+    this.paginator?.changePage(0)
+  }
+
+  // methods
 
   getProducts(page: number, perPage: number) {
     this.productsService
@@ -81,7 +94,6 @@ export class HomeComponent {
       .editProduct(`http://localhost:3000/clothes/${id}`, product)
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.getProducts(0, 5);
         },
         error: (error) => {
@@ -90,7 +102,7 @@ export class HomeComponent {
       });
   }
 
-  deleteProduct(id: any) {
+  deleteProduct(id: number) {
     this.productsService
       .deleteProduct(`http://localhost:3000/clothes/${id}`)
       .subscribe({
@@ -104,12 +116,10 @@ export class HomeComponent {
   }
 
   addProduct(product: Product) {
-    console.log('got to home from add');
     this.productsService
       .addProduct(`http://localhost:3000/clothes`, product)
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.getProducts(0, 5);
         },
         error: (error) => {
