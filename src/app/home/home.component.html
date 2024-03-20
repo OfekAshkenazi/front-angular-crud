@@ -14,3 +14,21 @@
   >
   </p-paginator>
 </div>
+
+
+<app-edit-product
+[display]="displayAddProduct"
+(confirm)="onConfirmAdd($event)"
+header="Add Product"
+>
+</app-edit-product>
+
+
+<app-edit-product
+[product]="selectedProduct"
+[display]="displayEditProduct"
+(confirm)="onConfirmEdit($event)"
+header="Edit Product"
+>
+</app-edit-product>
+

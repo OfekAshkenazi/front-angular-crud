@@ -4,11 +4,12 @@ import { Product, Products } from '../../types';
 import { ProductComponent } from '../components/product/product.component';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
+import { EditComponent } from '../components/edit/edit.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProductComponent, CommonModule, PaginatorModule],
+  imports: [ProductComponent, CommonModule, PaginatorModule, EditComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -16,6 +17,34 @@ export class HomeComponent {
   constructor(private productsService: ProductsService) {}
   products: Product[] = [];
   totalRecords: number = 0;
+  displayAddProduct: boolean = false;
+  displayEditProduct: boolean = false;
+
+  toggleEditView(product: Product) {
+    this.selectedProduct = product
+    this.displayEditProduct = true
+  }
+  
+  toggleAddView() {
+    this.displayAddProduct = true
+  }
+
+  selectedProduct: Product = {
+    id: 0,
+    name: '',
+    image: '',
+    price: '',
+    rating: 0,
+  };
+
+  onConfirmAdd(product: Product) {
+    this.addProduct(product);
+    this.displayAddProduct = false;
+  }
+  onConfirmEdit(product: Product) {
+    this.editProduct(product, this.selectedProduct.id ?? 0);
+    this.displayEditProduct = false;
+  }
 
   onPageChange(event: any) {
     this.getProducts(event.page, event.rows);
@@ -50,14 +79,13 @@ export class HomeComponent {
       });
   }
 
-  deleteProduct(product: Product, id: number) {
+  deleteProduct(id: number) {
     this.productsService
       .deleteProduct(`http://localhost:300/clothes/${id}`)
       .subscribe({
         next: (data) => {
           console.log(data);
           this.getProducts(0, 5);
-
         },
         error: (error) => {
           console.log(error);
