@@ -35,7 +35,10 @@ export class HomeComponent {
   toggleAddView() {
     this.displayAddProduct = true;
   }
-  toggleDeleteView(product: Product) {}
+
+  toggleDeleteView(product: Product) {
+    this.deleteProduct(product.id);
+  }
 
   selectedProduct: Product = {
     id: 0,
@@ -49,6 +52,7 @@ export class HomeComponent {
     this.addProduct(product);
     this.displayAddProduct = false;
   }
+
   onConfirmEdit(product: Product) {
     this.editProduct(product, this.selectedProduct.id ?? 0);
     this.displayEditProduct = false;
@@ -73,7 +77,6 @@ export class HomeComponent {
   }
 
   editProduct(product: Product, id: number) {
-    console.log(product, 'edit');
     this.productsService
       .editProduct(`http://localhost:3000/clothes/${id}`, product)
       .subscribe({
@@ -87,12 +90,11 @@ export class HomeComponent {
       });
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: any) {
     this.productsService
-      .deleteProduct(`http://localhost:300/clothes/${id}`)
+      .deleteProduct(`http://localhost:3000/clothes/${id}`)
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.getProducts(0, 5);
         },
         error: (error) => {
@@ -102,15 +104,16 @@ export class HomeComponent {
   }
 
   addProduct(product: Product) {
+    console.log('got to home from add');
     this.productsService
-      .addProduct(`http://localhost:300/clothes`, product)
+      .addProduct(`http://localhost:3000/clothes`, product)
       .subscribe({
         next: (data) => {
           console.log(data);
           this.getProducts(0, 5);
         },
         error: (error) => {
-          console.log(error);
+          console.log(error.message);
         },
       });
   }

@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-edit-product',
   standalone: true,
   imports: [
-    DialogModule,
+  DialogModule,
     CommonModule,
     FormsModule,
     RatingModule,
@@ -20,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './edit.component.scss',
 })
 export class EditComponent {
+
   @Input() display: boolean = false;
   // allways be provieded
   @Input() header!: string;
@@ -33,6 +34,8 @@ export class EditComponent {
     rating: 0,
   };
 
+
+
   @Output() confirm = new EventEmitter<Product>();
 
   onConfirm() {
@@ -45,4 +48,5 @@ export class EditComponent {
     this.display = false;
     this.displayChange.emit(this.display)
   }
+
 }

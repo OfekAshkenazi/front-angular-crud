@@ -14,9 +14,9 @@
   >
   </p-rating>
 
-  <div class="row">
+  <div class="row gap-05">
     <button type="button" pButton icon="pi pi-pencil" (click)="editProduct()" label="Edit"></button>
-    <button type="button" pButton icon="pi pi-trash" (click)="confirmDelete()" label="Delete"></button>
+    <button class="p-button-danger" #deleteButton type="button" pButton icon="pi pi-trash" (click)="confirmDelete()" label="Delete"></button>
   </div>
 </div>
 

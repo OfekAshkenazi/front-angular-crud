@@ -22,7 +22,7 @@
 
     <p-rating
       [(ngModel)]="product.rating"
-      [readonly]="true"
+      [readonly]="false"
       iconCancelClass="hidden"
     >
     </p-rating>
@@ -35,7 +35,7 @@
       pButton
       icon="pi pi-check"
       (click)="onConfirm()"
-      label="Add Product"
+      label="Confirm"
     ></button>
     <button
       type="button"
