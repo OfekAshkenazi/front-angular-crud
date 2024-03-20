@@ -1,8 +1,13 @@
 <div class="column gap-1">
+  <button type="button" pButton icon="pi pi-plus" (click)="toggleAddView()" label="Add Product"></button>
+
   <div class="row wrap gap-1 space-between">
     <app-product
       *ngFor="let product of products"
       [product]="product"
+      (edit)="toggleEditView($event)"
+      (delete)="toggleDeleteView($event)"
+
     ></app-product>
   </div>
 
@@ -15,20 +20,17 @@
   </p-paginator>
 </div>
 
-
 <app-edit-product
-[display]="displayAddProduct"
-(confirm)="onConfirmAdd($event)"
-header="Add Product"
+  [(display)]="displayAddProduct"
+  (confirm)="onConfirmAdd($event)"
+  header="Add Product"
 >
 </app-edit-product>
 
-
 <app-edit-product
-[product]="selectedProduct"
-[display]="displayEditProduct"
-(confirm)="onConfirmEdit($event)"
-header="Edit Product"
+  [product]="selectedProduct"
+  [(display)]="displayEditProduct"
+  (confirm)="onConfirmEdit($event)"
+  header="Edit Product"
 >
 </app-edit-product>
-

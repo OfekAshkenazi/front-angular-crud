@@ -4,12 +4,19 @@ import { Product, Products } from '../../types';
 import { ProductComponent } from '../components/product/product.component';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
+import { ButtonModule } from 'primeng/button';
 import { EditComponent } from '../components/edit/edit.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProductComponent, CommonModule, PaginatorModule, EditComponent],
+  imports: [
+    ProductComponent,
+    CommonModule,
+    PaginatorModule,
+    EditComponent,
+    ButtonModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -21,13 +28,14 @@ export class HomeComponent {
   displayEditProduct: boolean = false;
 
   toggleEditView(product: Product) {
-    this.selectedProduct = product
-    this.displayEditProduct = true
+    this.selectedProduct = product;
+    this.displayEditProduct = true;
   }
-  
+
   toggleAddView() {
-    this.displayAddProduct = true
+    this.displayAddProduct = true;
   }
+  toggleDeleteView(product: Product) {}
 
   selectedProduct: Product = {
     id: 0,

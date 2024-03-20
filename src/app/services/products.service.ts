@@ -16,12 +16,12 @@ export class ProductsService {
     });
   }
   addProduct(url: string, body: Product): Observable<Product> {
-    return this.apiservice.post(url, body, {});
+    return this.apiservice.post(url, body, { responseType: 'json' });
   }
   editProduct(url: string, body: Product): Observable<Product> {
-    return this.apiservice.put(url, body, {});
+    return this.apiservice.put(url, body, { responseType: 'json' });
   }
   deleteProduct(url: string): Observable<Product> {
-    return this.apiservice.delete(url, {});
+    return this.apiservice.delete(url, { responseType: 'json' });
   }
 }
