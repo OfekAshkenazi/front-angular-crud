@@ -3,8 +3,8 @@ import { Product } from './../../../types';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ToastModule } from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
@@ -22,7 +22,7 @@ import { ConfirmationService } from 'primeng/api';
   styleUrl: './product.component.scss',
 })
 export class ProductComponent {
-  constructor(private ConfirmationService: ConfirmationService) {}
+  constructor(private confirmationService: ConfirmationService) { }
 
   @Input() product!: Product;
   @Output() edit: EventEmitter<Product> = new EventEmitter<Product>();
@@ -31,11 +31,12 @@ export class ProductComponent {
   editProduct() {
     this.edit.emit(this.product);
   }
+
   confirmDelete() {
-    this.ConfirmationService.confirm({
+    this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this product?',
       accept: () => {
-        this.deleteProduct()
+        this.deleteProduct();
       },
     });
   }
@@ -44,5 +45,7 @@ export class ProductComponent {
     this.delete.emit(this.product);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 }
